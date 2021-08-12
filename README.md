@@ -1,0 +1,2 @@
+# ExpenseTrackerApp
+It is a simple expense manager web application that can be used by all for tracking their expenses accordingly. The user can add an expense/income amount in a currency of his/her choice with date, category and a note which will be optional and track his/her expenses accordingly. The user will also get a report showing analysis of monthly, weekly or daily expenses so that he/she will know main areas of spending and thus could spend money wisely.
