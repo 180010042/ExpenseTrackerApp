@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="static/add_transaction.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" data-auto-replace-svg="nest"></script>
+        <title> ExpenseTracker </title>
+    </head>
+    <body>
+        {% extends "base.html" %}
+        <div class="form-bg">
+         {% block content %} 
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-8">
+                        <form class="form-horizontal" method = "POST" id="TransactionForm" data-url="{% url 'ajax_load_categories' %}">
+                            {% csrf_token %}
+                            <div class = "title"><h2>Add Transaction</h2></div>
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <div class="col-md-4 col-sm-6">
+                                        <label class=" control-label">Date:</label>
+                                        <input class="form-control" name = "date" type="date" required>
+                                    </div>
+                                    <div class="col-md-8 col-sm-6">
+                                        <label class=" control-label">Amount:</label>
+                                        <input class="form-control" name="amount" type="number" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-5 col-sm-6">
+                                        <label class=" control-label">Transaction Type:</label>
+                                        <select class = "form-control" name ="type" id = "TransactionType" required>
+                                            <option value = "">---------select--------</option>
+                                            <option value = "Expense">Expense</option>
+                                            <option value = "Income">Income</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-7 col-sm-6">
+                                        <label class=" control-label">Category: </label>
+                                        <select class = "form-control"  name="category" id = "CategoryList" required>
+                                            <option value = "">-----------select----------</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-8">
+                                        <label class=" control-label">Note:</label>
+                                        <textarea class="form-control" rows = "6" name = "note" type="text"></textarea>
+                                    </div>
+                                    <div class="col-md-6 col-sm-8">
+                                        <input class = "form-control" type = "text" id = "customize_input" name = "category" placeholder = "Type your customize category here." required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-8 col-md-3">
+                                        <button type="submit" class="btn btn-default">ADD</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+    $("#TransactionType").change(function () {
+      var url = $("#TransactionForm").attr("data-url");  // get the url of the `load_categories` view
+      var transaction_type = $(this).val();  // get the selected type from the HTML input
+
+        $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request 
+        data: {
+          'type': transaction_type      // add the transaction type to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_categories` view function
+          $("#CategoryList").html(data);  // replace the contents of the category input with the data that came from the server
+        }
+        });
+
+    });
+    </script>
+    <script>
+    $("#CategoryList").change(function() {
+        if ($(this).val() == "Customize Category") {
+           $("#customize_input").show();
+           $("#CategoryList").removeAttr('name');
+           $("#customize_input").attr('name','category');
+           $("#customize_input").attr('required','true');
+        } else {
+            $("#customize_input").hide();
+            $("#customize_input").removeAttr('required');
+            $("#customize_input").removeAttr('name');
+            $("#CategoryList").attr('name','category');
+            $("#CategoryList").attr('required','true');
+        }
+    });
+    $("#CategoryList").trigger("change");
+    </script>
+               </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

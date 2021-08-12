@@ -1,0 +1,5 @@
+<option value="">-------select--------</option>
+<option value="Customize Category">Customize Category</option>
+{% for category in category_list %}
+<option value = {{category.name}}>{{category.name}}</option>
+{% endfor %}

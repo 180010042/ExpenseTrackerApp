@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="static/transaction_history.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" data-auto-replace-svg="nest"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col col-sm-8 col-xs-12">
+                            <h4 class="title">Transaction Details</h4>
+                        </div>
+                        <div class="col-sm-2 col-xs-12 text-right">
+                            <a href="/report" class="btn btn-primary btn-sm">Show Report</a>
+                        </div>
+                        <div class="col-sm-2 col-xs-12 text-right">
+                            <a href="/transaction" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Add Transaction</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th>Note</th>
+                                <th>Amount</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for details in page_obj %}
+                            <tr>
+                                <td>{{details.category}}</td>
+                                <td>{{details.date}}</td>
+                                <td>{{details.note}}</td>
+                                {% if details.transaction_type == "Expense" %}
+                                <td style = "color: red">-₹{{details.amount}}</td>
+                                {% else %}
+                                <td style = "color: green">₹{{details.amount}}</td>
+                                {% endif %}
+                                <td>
+                                    <ul class="action-list">
+                                        <form action = "{% url 'delete_data' details.id %}" method = 'POST'>
+                                        {% csrf_token %}
+                                        <li><button type="submit" class="btn"><em class="fa fa-trash"></em></a></li>
+                                        </form>
+                                    </ul>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col col-xs-6"> Showing <b>{{page_obj.number}}</b> out of <b>{{page_obj.paginator.num_pages}}</b> pages</div>
+                        <div class="col-xs-6">
+                            <ul class="pagination align-right" style="font-size: 20px; font-weight:bold; float:right">
+                                {% if page_obj.has_previous %}
+                                <li {% if page_obj.number == 1 %} class = "page-item active"{% endif %}><a style = "margin: 10px; text-align: center;" class="page-link" href="?page=1">&laquo; 1</a></li>
+                                <li class = "page-item"><a style = "margin: 10px; text-align: center;" class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a></li>
+                                {% endif %}
+                                {% if page_obj.has_next %}
+                                <li class = "page-item"><a style = "margin: 10px; text-align: center;" class="page-link" href="?page={{page_obj.next_page_number}}">Next</a></li>
+                                <li class = "page-item"><a style = "margin: 10px; text-align: center;" class="page-link" href="?page={{page_obj.paginator.num_pages}}">{{page_obj.paginator.num_pages}} &raquo; </a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

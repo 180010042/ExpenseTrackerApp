@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="static/report.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" data-auto-replace-svg="nest"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js"></script>
+    <title> ExpenseTracker </title>
+</head>
+  <body>
+    {% extends "base.html" %}
+    {% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-1 col-md-10">
+                <div class="panel">
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12">
+                        <div class="form-horizontal">
+                          <div class="form-content">
+                            <div class="group">
+                                <div class="col-md-3 col-sm-12">
+                                    <select class = "form-control" id= "month" required>
+                                        <option value = "current month">Current Month</option>
+                                        <option value = "previous month">Previous Month</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-offset-2 col-md-7 col-sm-12" id = "link">
+                                    <a style= "text-decoration: none; margin-right: 8px; float:left;" href = "/current-month-report" class="btn btn-default" >Show Current Month Report</a>                             
+                                    <a style= "text-decoration: none; margin-right: 8px; float:left;" href = "/daywise-current-month-report" class="btn btn-default" >Daywise</a>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                          <div class="row">
+                            <div class="col-md-4 col-sm-12">
+                              <ul class="nav nav-tabs" id = "amount">
+                                <li>Total Income: ₹{{total_income}}</li>
+                                <li>Total Expense: ₹{{total_expense}}</li>
+                                {% if net_balance < 0 %}
+                                <li style="color: red">Net Balance: -₹{{balance}}</li>
+                                {% else %}
+                                <li style="color: green">Net Balance: ₹{{balance}}</li>
+                                {% endif %}
+                              </ul>
+                            </div>
+                            <div class="col-md-8 col-sm-12">
+                              <div class="tab-content tabs">
+                                <canvas id='myChart3' width = '400px' height = '400px'></canvas>
+                                <script id="myscript" src = "/static/daywise_current_month_report.js"></script>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+    $("#month").change(function () {
+    if ($(this).val() == "previous month") {
+      var url = "/previous-month-link"; 
+      }  
+    else {
+      var url = "/current-month-link"
+    }
+
+      $.ajax({                       
+        url: url,                   
+        success: function (data) {   
+          $("#link").html(data); 
+        }
+      });
+    });
+    $("#month").change(function () {
+      if ($(this).val() == "previous month") {
+        var url = "/previous-month-amount"; 
+      }  
+      else {
+        var url = "/current-month-amount"
+      }
+
+      $.ajax({                       
+        url: url,                   
+        success: function (data) {   
+          $("#amount").html(data); 
+        }
+      });
+
+    });
+    </script>
+    {% endblock %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>  
