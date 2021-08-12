@@ -1,0 +1,81 @@
+body, html {
+    height: 100%;
+  }
+.form-bg{
+    background: #656876;
+    background: whitesmoke;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+form{
+    font-family: 'Roboto Mono', monospace;
+    background: #009999;
+    background: linear-gradient(to left, #33cccc,#009999);
+    padding: 30px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+    margin-top: 4%;
+}
+.form-horizontal .title{
+    font-size: 30px;
+    color: #fff;
+    text-align: center;
+    padding-bottom: 2%;
+}
+.form-horizontal .form-group{
+    padding: 0 40px;
+    margin-bottom: 15px;
+}
+.form-horizontal .form-control{
+    height: 40px;
+    padding: 10px 5px;
+    border: none;
+    color: #fff;
+    border-bottom: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: none;
+    background: #006699;
+}
+.form-horizontal .form-control::placeholder{
+    color:white;
+}
+.form-horizontal .form-control:focus{
+    box-shadow: none;
+    background: #0066cc;
+}
+.form-horizontal .control-label{
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: capitalize;
+    margin-bottom: 8px;
+}
+.form-horizontal .btn{
+    display: block;
+    float: right;
+    font-size: 14px;
+    color: #fff;
+    margin: 0;
+    border: none;
+    background: #006699;
+    border-radius: 4px;
+    padding: 10px 25px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.5s ease 0s;
+}
+.form-horizontal .btn:hover{
+    border-color: #fff;
+    color: #333;
+}
+@media only screen and (max-width: 767px){
+    .form-horizontal .form-group{
+        padding: 0;
+    }
+    .form-horizontal .form-control{
+        margin-bottom: 10px;
+    }
+}

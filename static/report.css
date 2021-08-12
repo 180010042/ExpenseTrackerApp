@@ -1,0 +1,110 @@
+body, html {
+    height: 100%;
+  }
+.panel{
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to left, #00c6ff,#0072ff);
+    padding: 10px;
+    border: none;
+    box-shadow: 0 .3rem .8rem rgba(0, 0, 0, .12);
+    margin-top: 1%;
+}
+.panel .form-horizontal .form-control{
+    height: 45px;
+    padding: 10px 5px;
+    margin-bottom: 10px;
+    border: none;
+    color: #fff;
+    border-bottom: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: none;
+    background: #006699;
+}
+.panel .form-horizontal .form-control:focus{
+    box-shadow: none;
+    background: #0066cc;
+}
+.panel .form-horizontal .btn{
+    display: block;
+    font-size: 14px;
+    color: #fff;
+    margin: 0;
+    border: none;
+    background: #006699;
+    border-radius: 4px;
+    padding: 10px 25px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.5s ease 0s;
+}
+.panel .form-horizontal .btn:hover{
+    border-color: #fff;
+    color: #333;
+}
+.panel .nav-tabs{
+    display: table-cell;
+    width: 25%;
+    min-width: 25%;
+    border: none;
+    vertical-align: top;
+}
+.panel .nav-tabs li{
+    float: none;
+    color: #333;
+    background: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 18px;
+    text-transform: capitalize;
+    text-align: center;
+    padding: 20px;
+    margin: 40px 20px 10px 0;
+    border-radius: 10px;
+    border: none;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease 0s;
+}
+.panel .tab-content{
+    background: #fff;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    line-height: 23px;
+    padding: 15px 15px 10px 15px;
+    box-shadow: 0 3px 7px rgba(0,0,0,0.15);
+    border-radius: 20px;
+}
+.panel .tab-content h3{
+    color: #222;
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: capitalize;
+    margin: 0 0 4px;
+}
+@media only screen and (max-width: 479px){
+    .panel{
+        padding: 5px;
+        margin: 0;
+    }
+    .panel .nav-tabs{
+        width: 100%;
+        padding: 0;
+        margin: 0 0 10px;
+        display: block;
+    }
+    .panel .nav-tabs li{ margin-right: 0; }
+    .panel .tab-content{
+        font-size: 14px;
+        margin-top: 0;
+        display: block;
+    }
+    .panel .tab-content h3{ font-size: 18px; }
+}
+@media only screen and (max-width: 767px){
+    .panel .form-horizontal .form-control{
+        margin-bottom: 10px;
+    }
+}

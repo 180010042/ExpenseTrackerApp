@@ -1,0 +1,55 @@
+.panel{
+    font-family: 'Roboto', sans-serif;
+    padding: 0;
+    border: none;
+    box-shadow: 0 .3rem .8rem rgba(0, 0, 0, .12);
+}
+.panel .panel-heading{
+    background: #fff;
+    padding: 25px 25px 10px;
+    border-radius: 0;
+}
+.panel .panel-heading .title{
+    color: #32393f;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 30px;
+    text-transform: capitalize;
+    margin: 0;
+}
+.panel .panel-heading .btn{
+    font-size: 15px;
+    padding: 6px 15px;
+    border-radius: 50px;
+    border: none;
+    transition: all 0.3s ease 0s;
+}
+.panel .panel-heading .btn:hover{ box-shadow: 0 0 10px rgba(0,0,0,0.2); }
+.panel .panel-body{ border-radius: 0; }
+.panel .panel-body .table thead tr th{
+    color: #333;
+    font-size: 19px;
+    font-weight: 400;
+    padding: 12px;
+}
+.panel .panel-body .table thead tr th:last-child{ width: 120px; }
+.panel .panel-body .table tbody tr td{
+    color: #555;
+    background: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 10px;
+    vertical-align: middle;
+    border-color: #e7e7e7;
+}
+.panel .panel-body .table tbody td span.label{ font-size: 13px; }
+.panel .panel-body .table tbody .action-list{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+@media only screen and (max-width:767px){
+    .panel .panel-heading{ text-align: center; margin-bottom: 5px;}
+    .panel .panel-heading .title{ margin: 0 0 15px; }
+    .panel .panel-heading .text-right{ text-align: center; }
+}
